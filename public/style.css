@@ -1,0 +1,38 @@
+.suraj{
+    display: flex;
+   
+}
+
+#pencil-size{
+    margin-left: 20px;
+    width: 250px;
+}
+#eraser{
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    
+}
+
+.bg{
+    background-color: grey;
+}
+
+.online{
+    display: flex;
+    margin-left: 830px;
+}
+#o-e{
+    width: 30px;
+    height: 30px;
+}
+
+#number{
+    margin-top: 5px;
+}
+
+#notification{
+    width: 30px;
+    height: 30px;
+    background-color: green;
+}

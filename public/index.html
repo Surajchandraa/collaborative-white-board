@@ -8,8 +8,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.min.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <div class="suraj">
+        <input type="color" name="color" id="color-type">
+        <input type="range" name="size" id="pencil-size">
+        <img src="eraser.png" alt="erase" id="eraser">
+        <div class="online">
+            <img src="notification.png" alt="notification" id="notification">
+            <img src="online-indicator.png" alt="online" id="o-e">
+            <p id="number">0</p>
+        </div>
+    </div>
 
     <canvas id="canvas" style="border: 1px solid black;"></canvas>
+    
+    
     <script src="script.js"></script>
     
 </body>

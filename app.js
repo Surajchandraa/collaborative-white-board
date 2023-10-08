@@ -15,15 +15,22 @@ app.get("/",(req,res)=>{
     res.sendFile(path.join(__dirname,"public")+"/index.html")
 })
 
+let users=0;
 io.on("connection", function(socket){
     console.log("user connected");
+    users++;
+
+    io.sockets.emit("broadcast-user-number",users);
 
     socket.on("draw",function(value){
         socket.broadcast.emit("all_users",value);
     })
 
+    
+
     socket.on("disconnect",function(){
-        console.log("user disconnected bro")
+        console.log("user disconnected bro");
+        users--;
     })
 })
 

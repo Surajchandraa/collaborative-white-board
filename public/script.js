@@ -2,42 +2,77 @@ var socket = io();
 
 
     const canvas = document.getElementById("canvas");
+    const paint = document.getElementById("color-type");
+    const range=document.getElementById("pencil-size");
+    const eraser=document.getElementById("eraser");
+    let no_of_user=document.getElementById("number");
+    
+
     const ctx = canvas.getContext("2d");
 
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
     let painting = false;
+    let color ="";
+    let size=3;
 
+    paint.addEventListener('input',function(){
+        color=paint.value;
+        eraser.classList.remove("bg")
+
+    })
+
+    range.addEventListener('input',function(){
+        size=range.value;
+    })
+
+    eraser.addEventListener("click",function(){
+        color="white";
+        eraser.classList.add("bg")
+    })
 
     function endpoint() {
         painting = false;
-        ctx.beginPath();
+        
     }
 
     function startpoint(e) {
         painting = true;
+        ctx.beginPath();
         draw(e);
+      
+
+      
     }
 
     function draw(e) {
         if (!painting) {
             return;
         }
-        ctx.lineWidth = 10;
+
+        const rect = canvas.getBoundingClientRect();
+        const offsetX = rect.left;
+        const offsetY = rect.top;
+
+        ctx.strokeStyle=color;
+        ctx.lineWidth = size;
         ctx.lineCap = "round";
-        ctx.lineTo(e.clientX, e.clientY);
-        ctx.stroke();
-        lastX = e.clientX;
-        lastY = e.clientY;
-       
+
         socket.emit('draw', {
-            linew: 10,
+            linew: size,
+            linecolor:color,
             linec: "round",
-            eclx: e.clientX,
-            ecly: e.clientY
+            eclx: e.clientX-offsetX,
+            ecly: e.clientY-offsetY
         
         });
+        
+        ctx.lineTo(e.clientX-offsetX, e.clientY-offsetY);
+        ctx.stroke();
+    
+       
+    
     }
 
     canvas.addEventListener("mousedown", startpoint);
@@ -49,8 +84,11 @@ socket.on("all_users", function (value) {
 
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
+    
+    
     ctx.lineWidth = value.linew;
     ctx.lineCap = value.linec;
+    ctx.strokeStyle=value.linecolor;
     ctx.lineTo(value.eclx, value.ecly);
     ctx.stroke();
    
@@ -60,5 +98,10 @@ socket.on("all_users", function (value) {
 
 )
 
+socket.on("broadcast-user-number",function(value){
+    no_of_user.innerHTML=`${value}`
+    console.log(value)
+    
+})
 
    
