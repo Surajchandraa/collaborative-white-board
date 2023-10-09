@@ -4,6 +4,15 @@ This is a collaborative white board application where many users can write on wh
 ## Installation:
 - clone this repository in your system directory.
 - run command `npm i` to install all depedencies.
-- 
-## this is a collaborative white board you can use it for study purpose and many more purposes..
+
+## How to run this:
+-  run command `nodemon app.js` in the case nodemon is installed in your system.
+-  otherwise `node app.js`.
+
+## Technology used:
+- nodejs
+- expressjs
+- socket.io (for communication and broadcasting)
+- canvas (html5)
+  
 
