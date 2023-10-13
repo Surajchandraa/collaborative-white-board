@@ -2,6 +2,7 @@ const express = require("express");
 const path =require("path")
 
 const app = express();
+const port = process.env.port || 4500;
 const http=require("http");
 const exp = require("constants");
 
@@ -35,6 +36,6 @@ io.on("connection", function(socket){
 })
 
 
-server.listen(4500,function(){
+server.listen(port,function(){
     console.log("your server is running at http://localhost:4500")
 })
